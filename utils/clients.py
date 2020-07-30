@@ -34,6 +34,10 @@ class AsyncRestClientException(Exception):
         self.message = msg
         super().__init__(self.message)
 
+    def get_msg(self):
+        """method to get error message"""
+        return self.message
+
 
 class AsyncRestClient(object):
     """
