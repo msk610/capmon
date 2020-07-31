@@ -17,7 +17,7 @@ class AsyncRestClientTest(AioHTTPTestCase):
 
         async def get_json(request: web.Request) -> web.Response:
             # test simple get with json response
-            self.assertEquals(request.method, 'GET')
+            self.assertEqual(request.method, 'GET')
             return web.json_response(data={
                 'name': 'example',
                 'age': 32,
@@ -25,16 +25,16 @@ class AsyncRestClientTest(AioHTTPTestCase):
 
         async def get_json_with_params(request: web.Request) -> web.Response:
             # test simple get with json response
-            self.assertEquals(request.method, 'GET')
+            self.assertEqual(request.method, 'GET')
             # expect specific params for request
-            self.assertEquals(request.query_string, 'p1=1&p2=example')
+            self.assertEqual(request.query_string, 'p1=1&p2=example')
             return web.json_response(data={
                 'correct': True,
             })
 
         async def get_text(request: web.Request) -> web.Response:
             # test simple get with text response
-            self.assertEquals(request.method, 'GET')
+            self.assertEqual(request.method, 'GET')
             return web.Response(text='Hello World')
 
         # setup test server
@@ -50,8 +50,8 @@ class AsyncRestClientTest(AioHTTPTestCase):
         """test simple json get request"""
         client = self.get_rest_client()
         res = await client.get('/getjson')
-        self.assertEquals(res['name'], 'example')
-        self.assertEquals(res['age'], 32)
+        self.assertEqual(res['name'], 'example')
+        self.assertEqual(res['age'], 32)
 
     @unittest_run_loop
     async def test_get_json_with_params(self) -> None:

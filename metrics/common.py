@@ -38,6 +38,37 @@ class Timeseries(object):
         """method to get raw values of the timeseries"""
         return self._raw_values
 
+    @staticmethod
+    def from_df(
+        name: str,
+        df: pd.DataFrame,
+        time_col: Optional[str] = 'ds',
+        val_col: Optional[str] = 'y',
+    ):
+        """
+        method to generate Timeseries object from dataframe
+
+        Parameters
+        ----------
+        name: str
+            name of the Timeseries
+        df: pd.Dataframe
+            the dataframe to convert to timeseries
+        time_col: str (default: ds)
+            the column to fetch the time values from
+        val_col: str (default: y)
+            the column to fetch metric values from
+        """
+        dt = pd.Timestamp('1970-01-01')
+        delta = pd.Timedelta('1s')
+        df['unix'] = (df[time_col] - dt) // delta
+        other_df = df.astype({'unix': int, val_col: float})
+        raw_vals = dict(zip(other_df['unix'], other_df[val_col]))
+        return Timeseries(
+            name=name,
+            values=raw_vals,
+        )
+
 
 class Query(AsyncTask, metaclass=abc.ABCMeta):
     """
