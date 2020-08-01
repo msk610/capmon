@@ -106,6 +106,6 @@ class FBProphetForecaster(Forecaster):
         future: pd.DataFrame
     ) -> Tuple[pd.Series, pd.Series]:
         """helper method to process trend data from single forecast"""
-        daily = future.groupby(future['ds'].dt.day_name())['trend'].agg('sum')
-        hourly = future.groupby(future['ds'].dt.hour)['trend'].agg('sum')
+        daily = future.groupby(future['ds'].dt.day_name())['trend'].agg('mean')
+        hourly = future.groupby(future['ds'].dt.hour)['trend'].agg('mean')
         return (hourly, daily)

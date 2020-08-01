@@ -8,6 +8,17 @@ class PrometheusQuery(Query):
     """
     PrometheusQuery is a Query to fetch Timeseries data from a
     prometheus data source
+
+    Parameters
+    ----------
+    query: str
+        query to make to prometheus
+    source: Optional[str] (default: http://localhost:9090)
+        source to make query to
+    lookback_days: Optional[int] (default: 7)
+        number of days of data to analyze
+    step: Optional[str] (default: 1h)
+        resolution to use for data
     """
 
     def __init__(

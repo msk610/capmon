@@ -1,5 +1,6 @@
 from typing import Optional
 import abc
+import asyncio
 
 
 class AsyncTask(object, metaclass=abc.ABCMeta):
@@ -11,6 +12,10 @@ class AsyncTask(object, metaclass=abc.ABCMeta):
     async def execute(self) -> Optional[object]:
         """method to execute async task"""
         pass
+
+    def execute_sync(self) -> Optional[object]:
+        """method to execute task synchronously"""
+        return asyncio.run(self.execute())
 
 
 class AsyncExecutionError(Exception):

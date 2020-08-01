@@ -1,0 +1,8 @@
+---
+datasources:
+  - name: local-prom
+    source: 'http://localhost:9090'
+    type: prometheus
+  - name: local-prom-2
+    source: 'http://localhost:9090'
+    type: prometheus
