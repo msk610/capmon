@@ -55,7 +55,7 @@ class Report(object):
         hourly_trend: Optional[Trend] = None
     ) -> None:
         self._forecasts = forecasts
-        self._daily_trend = daily_trend,
+        self._daily_trend = daily_trend
         self._hourly_trend = hourly_trend
 
     def contains_forecasts(self) -> bool:

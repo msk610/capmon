@@ -139,7 +139,7 @@ def gen_weekly_trend_graph_figure(
     """
     if not report.contains_daily_trends():
         return None
-    trend = report.get_daily_trends()[0]
+    trend = report.get_daily_trends()
     trend_vals = trend.get_trend_vals()
     keys = [
         'Monday',
