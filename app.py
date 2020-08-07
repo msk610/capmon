@@ -323,11 +323,13 @@ def handle_query(
 if __name__ == "__main__":
     logger.info(
         'starting application',
+        host=conf.get_host(),
         debug=conf.get_debug(),
         conf_path=conf.get_conf_path(),
         port=conf.get_port(),
     )
     app.run_server(
+        host=conf.get_host(),
         debug=conf.get_debug(),
-        port=conf.get_port()
+        port=conf.get_port(),
     )

@@ -73,12 +73,15 @@ class Config(object):
 
     def get_debug(self) -> bool:
         """method to check if debug is enabled"""
-        # return self._debug
-        return True
+        return self._debug
 
     def get_port(self) -> int:
         """method to get port to run in"""
         return self._port
+
+    def get_host(self) -> str:
+        """method to get host"""
+        return self._host
 
     def get_conf_path(self) -> str:
         """method to get conf path to read conf from"""
@@ -106,12 +109,16 @@ class Config(object):
         try:
             self._port = int(os.getenv(
                 'CAPMON_PORT',
-                8050
+                8050,
             ))
             self._debug = strtobool(os.getenv(
                 'CAPMON_DEBUG',
-                'no'
+                'no',
             ))
+            self._host = os.getenv(
+                'CAPMON_HOST',
+                '0.0.0.0',
+            )
             current_dir = os.path.dirname(os.path.realpath(__file__))
             self._conf_path = os.getenv(
                 'CAPMON_CONFIG_PATH',
