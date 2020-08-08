@@ -1,0 +1,12 @@
+language: python
+python:
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+jobs:
+  include:
+    - stage: "Test and Lint"
+      name: "Run Tests" 
+      script: ./run_tests.sh
+    - script: ./run_linting.sh
+      name: "Lint Code"
