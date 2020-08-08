@@ -1,5 +1,7 @@
 # Capmon
 
+[![Build Status](https://travis-ci.org/msk610/capmon.svg?branch=master)](https://travis-ci.org/msk610/capmon)
+
 Capmon is a stateless web-service to help you analyze long term trends
 and generate forecasting for your metrics/data. You can use this to
 determine things like traffic pattern and future growth pattern, which
