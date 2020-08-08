@@ -21,6 +21,9 @@ from helpers import (
 app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP]
 )
+app.title = 'Capmon'
+# setup server
+server = app.server
 # load configuration
 conf = Config()
 # setup logger
@@ -327,6 +330,7 @@ if __name__ == "__main__":
         debug=conf.get_debug(),
         conf_path=conf.get_conf_path(),
         port=conf.get_port(),
+        workers=conf.get_workers(),
     )
     app.run_server(
         host=conf.get_host(),
