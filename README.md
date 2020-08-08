@@ -6,6 +6,8 @@ determine things like traffic pattern and future growth pattern, which
 you can utilize to determine how to proactively scale your services
 for the future.
 
+![Capmon Demo](capmon-demo.gif)
+
 ## Table of Contents
   * [Running Capmon](#running-capmon)
   * [Installing Dependencies](#installing-dependencies)
