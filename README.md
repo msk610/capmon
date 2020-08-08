@@ -42,16 +42,16 @@ __NOTE__: make sure you have `pip` and `python3` setup
 Capmon uses the following environment variables to configure
 the webservice settings:
 
-`CAPMON_PORT`: port to run the service on
-    default: `8050`
-`CAPMON_WORKERS`: the number of workers to serve traffic
-    default: `2`
-`CAPMON_DEBUG`: whether to run the service on debug mode to see errors
-    default: `no` (yes to enable)
-`CAPMON_HOST`: host to bind the service to
-    default: `0.0.0.0`
-`CAPMON_CONFIG_PATH'`: path of file to load datasource configuration from
-    default: `$(PWD)/config.yml`
+- `CAPMON_PORT`: port to run the service on
+    * default: `8050`
+- `CAPMON_WORKERS`: the number of workers to serve traffic
+    * default: `2`
+- `CAPMON_DEBUG`: whether to run the service on debug mode to see errors
+    * default: `no` (yes to enable)
+- `CAPMON_HOST`: host to bind the service to
+    * default: `0.0.0.0`
+- `CAPMON_CONFIG_PATH'`: path of file to load datasource configuration from
+    * default: `$(PWD)/config.yml`
 
 ### Configuring datasources
 Capmon requires you to provide a YAML based configuration file to configure
@@ -72,9 +72,9 @@ datasources:
     type: <type>
 ```
 
-`<name>`: is the name of the datasource to show on the Capmon UI.
-`<url>`: is the url to connect to datasource (i.e http://localhost:9090)
-`<type>`: is the type of the datasource (options are: `prometheus` and `graphite`)
+- `<name>`: is the name of the datasource to show on the Capmon UI.
+- `<url>`: is the url to connect to datasource (i.e http://localhost:9090)
+- `<type>`: is the type of the datasource (options are: `prometheus` and `graphite`)
 
 __NOTE__: take a look at `config.yml` in the repository for example configuration
 
