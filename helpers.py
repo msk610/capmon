@@ -1,4 +1,5 @@
 from typing import Iterable, Tuple
+import pandas as pd
 from metrics.common import Timeseries
 from analysis.common import Report
 from analysis.forecast import FBProphetForecaster
@@ -95,13 +96,27 @@ def gen_forecast_graph_figure(
         analysis report object for the data
     """
     data = []
-    all_series = []
     if not report.contains_forecasts():
         return None
-    all_series.extend(report.get_forecasts())
+
+    all_series = []
+    f_series = report.get_forecasts()
+    f_map = {}
+    for f in f_series:
+        f_map[f.get_name()] = f.get_dataframe()
     all_series.extend(series)
     for single in all_series:
         df = single.get_dataframe()
+        f_df = f_map.get(single.get_name() + '_forecast', None)
+        if f_df is not None and df is not None:
+            all_data = pd.concat([df, f_df])
+            f_line = {
+                'x': all_data['ds'],
+                'y': all_data['y'],
+                'type': 'line',
+                'name': single.get_name() + '_forecast'
+            }
+            data.append(f_line)
         if df is not None:
             line = {
                 'x': df['ds'],
