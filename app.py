@@ -310,7 +310,7 @@ def handle_query(
             weekly_graph,
             daily_graph,
             dbc.Alert(
-                'Finished analysis',
+                'Finished',
                 color="success",
                 fade=True,
                 dismissable=True,

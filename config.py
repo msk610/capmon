@@ -5,6 +5,7 @@ from typing import Dict, Iterable
 import yaml
 from metrics.common import Query
 from metrics.prometheus import PrometheusQuery
+from metrics.graphite import GraphiteQuery
 
 
 class InvalidConfigError(Exception):
@@ -21,6 +22,7 @@ class DatasourceType(Enum):
     """
     # PROMETHEUS is prometheus data source
     PROMETHEUS = 'prometheus'
+    GRAPHITE = 'graphite'
 
     @staticmethod
     def from_str(src_type: str):
@@ -64,11 +66,18 @@ class Datasource(object):
         lookback_days: int,
     ) -> Query:
         """method to get Query object for source"""
-        return PrometheusQuery(
-            query=query,
-            source=self._source,
-            lookback_days=lookback_days
-        )
+        if self._type == DatasourceType.PROMETHEUS:
+            return PrometheusQuery(
+                query=query,
+                source=self._source,
+                lookback_days=lookback_days
+            )
+        else:
+            return GraphiteQuery(
+                query=query,
+                source=self._source,
+                lookback_days=lookback_days
+            )
 
 
 class Config(object):
@@ -111,8 +120,9 @@ class Config(object):
         """
         options = []
         for name in self._mapping:
+            ds = self._mapping[name]
             option = {
-                'label': f'{name} [{self._mapping[name].get_type()}]',
+                'label': f'{name} [{ds.get_type().value}]',
                 'value': name
             }
             options.append(option)

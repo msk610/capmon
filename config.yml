@@ -3,6 +3,6 @@ datasources:
   - name: prom-1
     source: 'http://localhost:9090'
     type: prometheus
-  - name: prom-2
-    source: 'http://localhost:9090'
-    type: prometheus
+  - name: graphite-1
+    source: 'http://localhost:8080'
+    type: graphite
