@@ -1,3 +1,4 @@
+from enum import Enum
 from distutils.util import strtobool
 import os
 from typing import Dict, Iterable
@@ -13,6 +14,30 @@ class InvalidConfigError(Exception):
     """
 
 
+class DatasourceType(Enum):
+    """
+    DatasourceType is type of supported datasource for the
+    application
+    """
+    # PROMETHEUS is prometheus data source
+    PROMETHEUS = 'prometheus'
+
+    @staticmethod
+    def from_str(src_type: str):
+        """
+        method to get DatasourceType given string
+
+        Parameters
+        ----------
+        src_type: str
+            src_type is source type string value provided
+        """
+        for sourcetype in DatasourceType:
+            if sourcetype.value == src_type:
+                return sourcetype
+        raise InvalidConfigError('unsupported datasource type')
+
+
 class Datasource(object):
     """
     Datasource defines a data source/database to fetch
@@ -23,14 +48,13 @@ class Datasource(object):
         self,
         name: str,
         source: str,
-        source_type: str,
+        source_type: DatasourceType,
     ) -> None:
         self._name = name
         self._source = source
         self._type = source_type
-        self._validate()
 
-    def get_type(self) -> str:
+    def get_type(self) -> DatasourceType:
         """method to get datasource type"""
         return self._type
 
@@ -45,17 +69,6 @@ class Datasource(object):
             source=self._source,
             lookback_days=lookback_days
         )
-
-    def _validate(
-        self
-    ) -> None:
-        """helper method to validate data source"""
-        supported_types = [
-            'prometheus',
-        ]
-        if self._type not in supported_types:
-            msg = f'invalid source type for {self._name}: {self._type}'
-            raise InvalidConfigError(msg)
 
 
 class Config(object):
@@ -82,6 +95,10 @@ class Config(object):
     def get_host(self) -> str:
         """method to get host"""
         return self._host
+
+    def get_workers(self) -> int:
+        """method to get worker count"""
+        return self._workers
 
     def get_conf_path(self) -> str:
         """method to get conf path to read conf from"""
@@ -111,6 +128,10 @@ class Config(object):
                 'CAPMON_PORT',
                 8050,
             ))
+            self._workers = int(os.getenv(
+                'CAPMON_WORKERS',
+                2,
+            ))
             self._debug = strtobool(os.getenv(
                 'CAPMON_DEBUG',
                 'no',
@@ -139,7 +160,9 @@ class Config(object):
                     mapping[datasource['name']] = Datasource(
                         name=datasource['name'],
                         source=datasource['source'],
-                        source_type=datasource['type']
+                        source_type=DatasourceType.from_str(
+                            src_type=datasource['type'],
+                        )
                     )
             return mapping
         except Exception as e:
