@@ -6,6 +6,14 @@ determine things like traffic pattern and future growth pattern, which
 you can utilize to determine how to proactively scale your services
 for the future.
 
+## Table of Contents
+  * [Running Capmon](#running-capmon)
+  * [Installing Dependencies](#installing-dependencies)
+  * [Configuration](#configuration)
+    + [Configuring datasources](#configuring-datasources)
+  * [Forecasting and Analysis](#forecasting-and-analysis)
+  * [Support](#support)
+
 ## Running Capmon
 Capmon is a lightweight [Flask](https://flask.palletsprojects.com/)
 application that uses [Dash](https://plotly.com/dash/) to render
