@@ -76,3 +76,7 @@ __NOTE__: initial instalation fbprophet can be computation intensive
 
 Please create an issue if you would like support for more forecasting and
 timeseries analysis libraries.
+
+## Support
+If you would like support for additional functionalities please create an
+open issue.
