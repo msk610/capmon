@@ -16,6 +16,7 @@ for the future.
   * [Configuration](#configuration)
     + [Configuring datasources](#configuring-datasources)
   * [Forecasting and Analysis](#forecasting-and-analysis)
+  * [Docker](#docker)
   * [Support](#support)
 
 ## Running Capmon
@@ -91,7 +92,15 @@ timeseries analysis libraries.
 
 ## Docker
 There is a Dockerfile available for this service. It exposes port
-`8050` for the service which you can port map.
+`8050` for the service which you can port map. In order to pull
+the image and run it, use the following command:
+
+```
+docker run -d -p 8050:8050 dockabir/capmon
+```
+
+The master branch is pushed as latest tag to the docker hub repo
+for the tool, which is linked [here](https://hub.docker.com/r/dockabir/capmon)
 
 ## Support
 If you would like support for additional functionalities please create an
