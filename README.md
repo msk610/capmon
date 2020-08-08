@@ -89,6 +89,10 @@ __NOTE__: initial instalation fbprophet can be computation intensive
 Please create an issue if you would like support for more forecasting and
 timeseries analysis libraries.
 
+## Docker
+There is a Dockerfile available for this service. It exposes port
+`8050` for the service which you can port map.
+
 ## Support
 If you would like support for additional functionalities please create an
 open issue.
